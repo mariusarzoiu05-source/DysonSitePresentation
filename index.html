@@ -685,17 +685,25 @@ document.querySelectorAll('.acc-item').forEach(item=>{
     document.querySelectorAll('.acc-item').forEach(i=>i.classList.remove('active'));
     item.classList.add('active');
     const d=ACCS[+item.dataset.i];
+    
+    // FAZA 1: fade out
     accImg.classList.add('out');
     accName.classList.add('out');
     accDesc.classList.add('out');
+    
     setTimeout(()=>{
+      // FAZA 2: schimbă conținutul
       accImg.src=d.img;
       accName.textContent=d.name;
       accDesc.textContent=d.desc;
+      
+      // FAZA 3: forțează reflow înainte de fade in
+      accImg.offsetHeight; // <- asta e cheia
+      
       accImg.classList.remove('out');
       accName.classList.remove('out');
       accDesc.classList.remove('out');
-    },280);
+    },300);
   });
 });
 </script>
