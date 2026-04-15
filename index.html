@@ -16,6 +16,42 @@
 html{cursor:none;scroll-behavior:smooth}
 body{background:var(--dark);color:var(--cream);font-family:var(--sans);min-height:100vh}
 
+#s7{background:var(--dark)}
+.s7-inner{
+  text-align:center;position:relative;z-index:2;
+  max-width:800px;padding:0 40px;
+}
+.s7-inner .section-label{justify-content:center}
+.s7-inner .section-label::before{display:none}
+.s7-title{
+  font-family:var(--serif);font-size:clamp(14px,2vw,20px);
+  font-weight:300;letter-spacing:0.4em;text-transform:uppercase;
+  color:rgba(245,240,232,0.25);margin-bottom:32px;
+}
+.s7-divider{
+  width:60px;height:0.5px;
+  background:linear-gradient(to right,transparent,var(--gold),transparent);
+  margin:0 auto 48px;
+}
+.s7-names{
+  display:flex;flex-wrap:wrap;
+  justify-content:center;gap:16px 48px;
+}
+.s7-name{
+  font-family:var(--serif);
+  font-size:clamp(32px,4vw,52px);
+  font-weight:300;color:var(--cream);
+  position:relative;
+}
+.s7-name::after{
+  content:'';position:absolute;bottom:-4px;left:0;right:0;
+  height:0.5px;
+  background:linear-gradient(to right,transparent,var(--gold),transparent);
+  transform:scaleX(0);
+  transition:transform 0.4s ease;
+}
+.s7-name:hover::after{transform:scaleX(1)}
+
 /* ── CUSTOM CURSOR ─────────────────────────────────────── */
 #cursor{
   position:fixed;width:8px;height:8px;
@@ -526,6 +562,23 @@ section{
     <div class="reveal d5" style="font-size:10px;letter-spacing:0.3em;text-transform:uppercase;color:rgba(201,160,80,0.2)">Disponibil acum · €499</div>
   </div>
   
+</section>
+
+<section id="s7">
+  <div class="glow glow-gold" style="width:600px;height:600px;left:50%;top:50%;transform:translate(-50%,-50%);opacity:0.03"></div>
+  <div class="s7-inner">
+    <div class="section-label reveal d1">Echipa</div>
+    <h2 class="s7-title reveal d2">Prezentat de</h2>
+    <div class="s7-divider reveal d3"></div>
+    <div class="s7-names">
+      <div class="s7-name reveal d3">Andreea</div>
+      <div class="s7-name reveal d4">Maria</div>
+      <div class="s7-name reveal d5">Elena</div>
+      <div class="s7-name reveal d6">Ioana</div>
+      <div class="s7-name reveal d7">Alexandra</div>
+      <div class="s7-name reveal d8">Cristina</div>
+    </div>
+  </div>
 </section>
 
 
