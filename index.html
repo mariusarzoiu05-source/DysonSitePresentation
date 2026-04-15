@@ -13,8 +13,8 @@
   --serif:'Cormorant Garamond',Georgia,serif;
   --sans:'Inter',system-ui,sans-serif;
 }
-html{scroll-snap-type:y mandatory;overflow-y:scroll;height:100%;cursor:none}
-body{background:var(--dark);color:var(--cream);font-family:var(--sans);height:100%}
+html{cursor:none}
+body{background:var(--dark);color:var(--cream);font-family:var(--sans)}
 
 /* ── CUSTOM CURSOR ─────────────────────────────────────── */
 #cursor{
@@ -48,8 +48,8 @@ body:hover #cursor{opacity:1}
 .dot.active{background:var(--gold);transform:scale(1.5)}
 
 /* ── SECTIONS ──────────────────────────────────────────── */
-section{
-  height:100vh;scroll-snap-align:start;
+section{/*
+  height:100vh;
   position:relative;overflow:hidden;
   display:flex;align-items:center;justify-content:center;
 }
