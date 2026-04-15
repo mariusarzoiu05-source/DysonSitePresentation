@@ -14,125 +14,252 @@
   --sans:'Inter',system-ui,sans-serif;
 }
 html{cursor:none;scroll-behavior:smooth}
-body{background:var(--dark);color:var(--cream);font-family:var(--sans)}
+body{background:var(--dark);color:var(--cream);font-family:var(--sans);min-height:100vh}
 
 /* ── CUSTOM CURSOR ─────────────────────────────────────── */
-#cursor{position:fixed;width:8px;height:8px;background:var(--gold);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:width 0.3s,height 0.3s}
-#cursor-ring{position:fixed;width:36px;height:36px;border:0.5px solid rgba(201,160,80,0.5);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:width 0.3s,height 0.3s,border-color 0.3s}
+#cursor{
+  position:fixed;width:8px;height:8px;
+  background:var(--gold);border-radius:50%;
+  pointer-events:none;z-index:9999;
+  transform:translate(-50%,-50%);
+  transition:transform 0.1s ease,width 0.3s ease,height 0.3s ease,opacity 0.3s;
+}
+#cursor-ring{
+  position:fixed;width:36px;height:36px;
+  border:0.5px solid rgba(201,160,80,0.5);
+  border-radius:50%;pointer-events:none;z-index:9998;
+  transform:translate(-50%,-50%);
+  transition:transform 0.18s ease,width 0.3s ease,height 0.3s ease,opacity 0.3s,border-color 0.3s;
+}
+body:hover #cursor{opacity:1}
 
 /* ── NAV DOTS ──────────────────────────────────────────── */
-#nav-dots{position:fixed;right:32px;top:50%;transform:translateY(-50%);z-index:100;display:flex;flex-direction:column;gap:12px}
-.dot{width:6px;height:6px;border-radius:50%;background:rgba(201,160,80,0.25);cursor:none;transition:all 0.4s cubic-bezier(0.34,1.56,0.64,1);border:0.5px solid rgba(201,160,80,0.35)}
+#nav-dots{
+  position:fixed;right:32px;top:50%;
+  transform:translateY(-50%);
+  z-index:100;display:flex;flex-direction:column;gap:12px;
+}
+.dot{
+  width:6px;height:6px;border-radius:50%;
+  background:rgba(201,160,80,0.25);cursor:none;
+  transition:all 0.4s cubic-bezier(0.34,1.56,0.64,1);
+  border:0.5px solid rgba(201,160,80,0.35);
+}
 .dot.active{background:var(--gold);transform:scale(1.5)}
 
 /* ── SECTIONS ──────────────────────────────────────────── */
-section{height:100vh;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center}
+section{
+  height:100vh;
+  position:relative;overflow:hidden;
+  display:flex;align-items:center;justify-content:center;
+}
 
-/* ── REVEAL ────────────────────────────────────────────── */
-.reveal{opacity:0;transition:opacity 0.9s cubic-bezier(0.16,1,0.3,1),transform 0.9s cubic-bezier(0.16,1,0.3,1)}
+/* ── REVEAL ANIMATIONS ─────────────────────────────────── */
+.reveal{
+  opacity:0;
+  transform:translateY(32px);
+  transition:opacity 0.9s cubic-bezier(0.16,1,0.3,1),
+             transform 0.9s cubic-bezier(0.16,1,0.3,1);
+}
 .reveal.up{transform:translateY(32px)}
 .reveal.left{transform:translateX(-40px)}
 .reveal.right{transform:translateX(40px)}
-.reveal.scale{transform:scale(0.92)}
+.reveal.scale{transform:scale(0.92);transform-origin:center}
 .reveal.visible{opacity:1;transform:none}
-.d1{transition-delay:.05s}.d2{transition-delay:.15s}.d3{transition-delay:.25s}
-.d4{transition-delay:.35s}.d5{transition-delay:.45s}.d6{transition-delay:.55s}
-.d7{transition-delay:.65s}.d8{transition-delay:.75s}
+
+/* stagger delays */
+.d1{transition-delay:0.05s}.d2{transition-delay:0.15s}
+.d3{transition-delay:0.25s}.d4{transition-delay:0.35s}
+.d5{transition-delay:0.45s}.d6{transition-delay:0.55s}
+.d7{transition-delay:0.65s}.d8{transition-delay:0.75s}
 
 /* ── BG LINES ──────────────────────────────────────────── */
-.bg-line{position:absolute;top:0;bottom:0;width:0.5px;background:linear-gradient(to bottom,transparent,rgba(201,160,80,0.1),transparent);pointer-events:none}
+.bg-line{
+  position:absolute;top:0;bottom:0;width:0.5px;
+  background:linear-gradient(to bottom,transparent,rgba(201,160,80,0.1),transparent);
+  pointer-events:none;
+}
 
 /* ── S1 HERO ───────────────────────────────────────────── */
 #s1{background:var(--dark)}
-.hero-inner{display:grid;grid-template-columns:1fr 1fr;align-items:center;width:100%;max-width:1200px;padding:0 80px;gap:60px;position:relative;z-index:2}
-.hero-eyebrow{font-size:10px;font-weight:400;letter-spacing:0.4em;text-transform:uppercase;color:var(--gold);margin-bottom:24px;display:flex;align-items:center;gap:14px}
-.hero-eyebrow::before{content:'';display:block;width:0px;height:0.5px;background:var(--gold);transition:width 1.2s cubic-bezier(0.16,1,0.3,1) 0.3s}
+.hero-inner{
+  display:grid;grid-template-columns:1fr 1fr;
+  align-items:center;width:100%;max-width:1200px;
+  padding:0 80px;gap:60px;position:relative;z-index:2;
+}
+.hero-eyebrow{
+  font-size:10px;font-weight:400;letter-spacing:0.4em;
+  text-transform:uppercase;color:var(--gold);margin-bottom:24px;
+  display:flex;align-items:center;gap:14px;
+}
+.hero-eyebrow::before{
+  content:'';display:block;width:0px;height:0.5px;
+  background:var(--gold);
+  transition:width 1.2s cubic-bezier(0.16,1,0.3,1) 0.3s;
+}
 .hero-eyebrow.line-grow::before{width:40px}
-.hero-title{font-family:var(--serif);font-size:clamp(56px,6.5vw,96px);font-weight:300;line-height:0.95;color:var(--cream);margin-bottom:20px}
-.title-line{display:block;overflow:hidden}
-.title-line span{display:block;transform:translateY(110%);transition:transform 0.9s cubic-bezier(0.16,1,0.3,1)}
+
+.hero-title{
+  font-family:var(--serif);
+  font-size:clamp(56px,6.5vw,96px);
+  font-weight:300;line-height:0.95;
+  color:var(--cream);margin-bottom:20px;
+  overflow:hidden;
+}
+.hero-title em{font-style:italic;color:var(--gold);display:block}
+
+.title-line{
+  display:block;overflow:hidden;
+}
+.title-line span{
+  display:block;
+  transform:translateY(110%);
+  transition:transform 0.9s cubic-bezier(0.16,1,0.3,1);
+}
 .title-line.visible span{transform:translateY(0)}
-.hero-sub{font-size:13px;font-weight:300;letter-spacing:0.06em;color:rgba(245,240,232,0.45);line-height:1.9;max-width:380px;margin-bottom:48px}
+
+.hero-sub{
+  font-size:13px;font-weight:300;letter-spacing:0.06em;
+  color:rgba(245,240,232,0.45);line-height:1.9;
+  max-width:380px;margin-bottom:48px;
+}
 .hero-price-row{display:flex;align-items:baseline;gap:16px;margin-bottom:8px}
-.hero-price{font-family:var(--serif);font-size:52px;font-weight:300;color:var(--gold);line-height:1}
-.hero-price-old{font-size:16px;color:rgba(245,240,232,0.22);text-decoration:line-through;font-family:var(--serif)}
-.hero-save{font-size:10px;letter-spacing:0.12em;background:rgba(201,160,80,0.1);border:0.5px solid rgba(201,160,80,0.35);color:var(--gold);padding:5px 14px;border-radius:20px}
+.hero-price{
+  font-family:var(--serif);font-size:52px;font-weight:300;
+  color:var(--gold);line-height:1;
+}
+.hero-price-old{
+  font-size:16px;color:rgba(245,240,232,0.22);
+  text-decoration:line-through;font-family:var(--serif);
+}
+.hero-save{
+  font-size:10px;letter-spacing:0.12em;
+  background:rgba(201,160,80,0.1);
+  border:0.5px solid rgba(201,160,80,0.35);
+  color:var(--gold);padding:5px 14px;border-radius:20px;
+}
 .hero-delivery{font-size:11px;color:rgba(245,240,232,0.22);letter-spacing:0.06em;margin-top:10px}
 
-/* floating + shimmer */
+/* floating product image */
 .float-img{animation:floatY 6s ease-in-out infinite}
 @keyframes floatY{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
 
-/* gold shimmer sweep on product */
-.img-shimmer-wrap{position:relative;display:inline-block}
-.img-shimmer-wrap::after{
-  content:'';position:absolute;inset:0;
-  background:linear-gradient(105deg,transparent 40%,rgba(201,160,80,0.12) 50%,transparent 60%);
-  background-size:200% 100%;
-  animation:shimmer 4s ease-in-out infinite;
-  pointer-events:none;border-radius:4px;
+/* rings */
+.hero-ring{
+  position:absolute;border-radius:50%;
+  border:0.5px solid rgba(201,160,80,0.07);
+  top:50%;left:50%;
+  transform:translate(-50%,-50%) scale(0);
+  transition:transform 1.4s cubic-bezier(0.16,1,0.3,1);
 }
-@keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
-
-.hero-ring{position:absolute;border-radius:50%;border:0.5px solid rgba(201,160,80,0.07);top:50%;left:50%;transform:translate(-50%,-50%) scale(0);transition:transform 1.4s cubic-bezier(0.16,1,0.3,1)}
 .hero-ring.show{transform:translate(-50%,-50%) scale(1)}
-/* ring slow spin */
-#ring1{animation:none}
-#ring2{animation:spinSlow 30s linear infinite}
-#ring3{animation:spinSlow 20s linear infinite reverse}
-@keyframes spinSlow{from{transform:translate(-50%,-50%) scale(1) rotate(0deg)}to{transform:translate(-50%,-50%) scale(1) rotate(360deg)}}
 
-.scroll-cue{position:absolute;bottom:36px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:8px;z-index:2;animation:bounce 2.5s ease-in-out infinite}
+/* scroll cue */
+.scroll-cue{
+  position:absolute;bottom:36px;left:50%;transform:translateX(-50%);
+  display:flex;flex-direction:column;align-items:center;gap:8px;z-index:2;
+  animation:bounce 2.5s ease-in-out infinite;
+}
 .scroll-cue span{font-size:9px;letter-spacing:0.3em;text-transform:uppercase;color:rgba(201,160,80,0.35)}
 .scroll-arrow{width:12px;height:12px;border-right:0.5px solid rgba(201,160,80,0.4);border-bottom:0.5px solid rgba(201,160,80,0.4);transform:rotate(45deg)}
 @keyframes bounce{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(7px)}}
 
 /* ── S2 TECH ───────────────────────────────────────────── */
 #s2{background:#06080D}
-.s2-inner{display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:100px;width:100%;max-width:1200px;padding:0 80px;position:relative;z-index:2}
-.section-label{font-size:10px;font-weight:400;letter-spacing:0.4em;text-transform:uppercase;color:var(--gold);margin-bottom:20px;display:flex;align-items:center;gap:14px}
+.s2-inner{
+  display:grid;grid-template-columns:1fr 1fr;
+  align-items:center;gap:100px;
+  width:100%;max-width:1200px;padding:0 80px;
+  position:relative;z-index:2;
+}
+.section-label{
+  font-size:10px;font-weight:400;letter-spacing:0.4em;
+  text-transform:uppercase;color:var(--gold);margin-bottom:20px;
+  display:flex;align-items:center;gap:14px;
+}
 .section-label::before{content:'';display:block;width:40px;height:0.5px;background:var(--gold)}
-.section-title{font-family:var(--serif);font-size:clamp(34px,4vw,56px);font-weight:300;line-height:1.1;color:var(--cream);margin-bottom:40px}
+.section-title{
+  font-family:var(--serif);font-size:clamp(34px,4vw,56px);
+  font-weight:300;line-height:1.1;color:var(--cream);margin-bottom:40px;
+}
 .section-title em{font-style:italic;color:var(--gold)}
-.tech-stats{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:rgba(201,160,80,0.08);border:0.5px solid rgba(201,160,80,0.08)}
-.stat-box{background:#06080D;padding:28px 24px;transition:background 0.3s;position:relative;overflow:hidden}
-.stat-box::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(to right,transparent,var(--gold),transparent);transform:scaleX(0);transition:transform 0.5s ease}
+
+.tech-stats{
+  display:grid;grid-template-columns:1fr 1fr;gap:1px;
+  background:rgba(201,160,80,0.08);
+  border:0.5px solid rgba(201,160,80,0.08);
+}
+.stat-box{
+  background:#06080D;padding:28px 24px;
+  transition:background 0.3s;position:relative;overflow:hidden;
+}
+.stat-box::after{
+  content:'';position:absolute;bottom:0;left:0;right:0;height:1px;
+  background:linear-gradient(to right,transparent,var(--gold),transparent);
+  transform:scaleX(0);transition:transform 0.5s ease;
+}
 .stat-box:hover{background:rgba(201,160,80,0.03)}
 .stat-box:hover::after{transform:scaleX(1)}
-.stat-num{font-family:var(--serif);font-size:40px;font-weight:300;color:var(--gold);line-height:1;margin-bottom:6px}
-.stat-label{font-size:10px;font-weight:300;letter-spacing:0.1em;color:rgba(245,240,232,0.38);text-transform:uppercase;line-height:1.5}
+.stat-num{
+  font-family:var(--serif);font-size:40px;font-weight:300;
+  color:var(--gold);line-height:1;margin-bottom:6px;
+}
+.stat-label{
+  font-size:10px;font-weight:300;letter-spacing:0.1em;
+  color:rgba(245,240,232,0.38);text-transform:uppercase;line-height:1.5;
+}
 
 /* ── S3 ACCESORII ──────────────────────────────────────── */
 #s3{background:var(--dark);align-items:stretch}
 .s3-inner{width:100%;height:100%;display:grid;grid-template-columns:360px 1fr}
-.acc-sidebar{border-right:0.5px solid rgba(201,160,80,0.08);padding:72px 44px;display:flex;flex-direction:column;justify-content:center}
+.acc-sidebar{
+  border-right:0.5px solid rgba(201,160,80,0.08);
+  padding:72px 44px;display:flex;flex-direction:column;
+  justify-content:center;gap:0;
+}
 .acc-sidebar .section-title{font-size:36px;margin-bottom:32px}
 .acc-list{display:flex;flex-direction:column;gap:2px}
-.acc-item{padding:14px 18px;cursor:none;border:0.5px solid transparent;border-radius:8px;transition:all 0.3s ease;display:flex;align-items:center;gap:14px}
+.acc-item{
+  padding:14px 18px;cursor:none;
+  border:0.5px solid transparent;border-radius:8px;
+  transition:all 0.3s ease;display:flex;align-items:center;gap:14px;
+}
 .acc-item:hover{background:rgba(201,160,80,0.04);border-color:rgba(201,160,80,0.1)}
 .acc-item.active{background:rgba(201,160,80,0.07);border-color:rgba(201,160,80,0.22)}
-.acc-num{font-family:var(--serif);font-size:18px;font-weight:300;color:rgba(201,160,80,0.25);min-width:26px;transition:color 0.3s}
-.acc-item.active .acc-num,.acc-item:hover .acc-num{color:var(--gold)}
-.acc-item-name{font-size:12px;font-weight:300;color:rgba(245,240,232,0.45);transition:color 0.3s}
-.acc-item.active .acc-item-name{color:var(--cream)}
-.acc-stage{position:relative;display:flex;align-items:center;justify-content:center;overflow:hidden}
-.acc-stage::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 50%,rgba(201,160,80,0.05) 0%,transparent 65%)}
-.acc-display{position:relative;z-index:2;text-align:center;padding:0 60px}
-
-/* IMAGE SWAP — key fix: wrapper clips old image out while new comes in */
-.acc-img-wrap{position:relative;height:52vh;display:flex;align-items:center;justify-content:center}
-.acc-img-wrap img{
-  position:absolute;
-  max-height:100%;max-width:45%;object-fit:contain;
-  filter:drop-shadow(0 30px 60px rgba(0,0,0,0.7));
-  transition:opacity 0.35s ease, transform 0.4s cubic-bezier(0.34,1.2,0.64,1);
+.acc-num{
+  font-family:var(--serif);font-size:18px;font-weight:300;
+  color:rgba(201,160,80,0.25);min-width:26px;transition:color 0.3s;
 }
-.acc-img-wrap img.hide{opacity:0;transform:scale(0.88) translateY(16px);pointer-events:none}
-.acc-img-wrap img.show{opacity:1;transform:scale(1) translateY(0)}
+.acc-item.active .acc-num,.acc-item:hover .acc-num{color:var(--gold)}
+.acc-item-name{font-size:12px;font-weight:300;color:rgba(245,240,232,0.45);transition:color 0.3s;line-height:1.4}
+.acc-item.active .acc-item-name{color:var(--cream)}
 
-.acc-info-name{font-family:var(--serif);font-size:28px;font-weight:300;color:var(--cream);margin:28px 0 10px;transition:opacity 0.3s,transform 0.4s}
-.acc-info-desc{font-size:12px;font-weight:300;color:rgba(245,240,232,0.42);line-height:1.9;max-width:460px;margin:0 auto;transition:opacity 0.3s,transform 0.4s}
-.acc-info-name.fade,.acc-info-desc.fade{opacity:0;transform:translateY(10px)}
+.acc-stage{
+  position:relative;display:flex;
+  align-items:center;justify-content:center;overflow:hidden;
+}
+.acc-stage::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse at 50% 50%,rgba(201,160,80,0.05) 0%,transparent 65%);
+}
+.acc-display{position:relative;z-index:2;text-align:center;padding:0 60px}
+.acc-display img{
+  max-height:52vh;max-width:45%;object-fit:contain;
+  filter:drop-shadow(0 30px 60px rgba(0,0,0,0.7));
+  transition:opacity 0.3s ease,transform 0.4s cubic-bezier(0.34,1.2,0.64,1);
+}
+.acc-display img.out{opacity:0;transform:scale(0.9) translateY(16px)}
+.acc-info-name{
+  font-family:var(--serif);font-size:28px;font-weight:300;
+  color:var(--cream);margin:28px 0 10px;
+  transition:opacity 0.3s,transform 0.4s;
+}
+.acc-info-desc{
+  font-size:12px;font-weight:300;color:rgba(245,240,232,0.42);
+  line-height:1.9;max-width:460px;margin:0 auto;
+  transition:opacity 0.3s,transform 0.4s;
+}
+.acc-info-name.out,.acc-info-desc.out{opacity:0;transform:translateY(10px)}
 
 /* ── S4 WHY ────────────────────────────────────────────── */
 #s4{background:#06080D}
@@ -140,26 +267,53 @@ section{height:100vh;position:relative;overflow:hidden;display:flex;align-items:
 .s4-inner .section-label{justify-content:center}
 .s4-inner .section-label::before{display:none}
 .s4-inner .section-title{text-align:center;margin-bottom:56px}
-.reasons-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(201,160,80,0.08);border:0.5px solid rgba(201,160,80,0.08)}
-.reason-card{background:#06080D;padding:44px 32px;text-align:left;transition:background 0.35s;position:relative;overflow:hidden}
-.reason-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1.5px;background:linear-gradient(to right,transparent,var(--gold),transparent);transform:scaleX(0);transition:transform 0.5s ease}
+.reasons-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:1px;background:rgba(201,160,80,0.08);
+  border:0.5px solid rgba(201,160,80,0.08);
+}
+.reason-card{
+  background:#06080D;padding:44px 32px;text-align:left;
+  transition:background 0.35s;position:relative;overflow:hidden;
+}
+.reason-card::after{
+  content:'';position:absolute;bottom:0;left:0;right:0;height:1.5px;
+  background:linear-gradient(to right,transparent,var(--gold),transparent);
+  transform:scaleX(0);transition:transform 0.5s ease;
+}
 .reason-card:hover{background:rgba(201,160,80,0.03)}
 .reason-card:hover::after{transform:scaleX(1)}
-.reason-num{font-family:var(--serif);font-size:44px;font-weight:300;color:rgba(201,160,80,0.12);line-height:1;margin-bottom:16px}
+.reason-num{
+  font-family:var(--serif);font-size:44px;font-weight:300;
+  color:rgba(201,160,80,0.12);line-height:1;margin-bottom:16px;
+}
 .reason-highlight{font-family:var(--serif);font-size:30px;font-weight:300;color:var(--gold);margin-bottom:4px}
 .reason-hl-label{font-size:9px;letter-spacing:0.15em;text-transform:uppercase;color:rgba(245,240,232,0.3)}
 .reason-desc{font-size:12px;font-weight:300;color:rgba(245,240,232,0.4);line-height:1.8;margin-top:16px}
 
 /* ── S5 KIT ────────────────────────────────────────────── */
 #s5{background:var(--dark)}
-.s5-inner{display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:80px;width:100%;max-width:1200px;padding:0 80px;position:relative;z-index:2}
-.kit-includes{display:flex;flex-direction:column;margin:28px 0 36px}
-.kit-row{display:flex;align-items:center;gap:14px;padding:12px 0;border-bottom:0.5px solid rgba(201,160,80,0.06);transition:padding-left 0.3s ease}
+.s5-inner{
+  display:grid;grid-template-columns:1fr 1fr;
+  align-items:center;gap:80px;
+  width:100%;max-width:1200px;padding:0 80px;
+  position:relative;z-index:2;
+}
+.kit-includes{display:flex;flex-direction:column;gap:0;margin:28px 0 36px}
+.kit-row{
+  display:flex;align-items:center;gap:14px;
+  padding:12px 0;border-bottom:0.5px solid rgba(201,160,80,0.06);
+  transition:padding 0.3s;
+}
 .kit-row:hover{padding-left:8px}
 .kit-dot{width:4px;height:4px;border-radius:50%;background:var(--gold);flex-shrink:0}
 .kit-row-text{font-size:13px;font-weight:300;color:rgba(245,240,232,0.55);line-height:1.5}
 .kit-row-text strong{font-weight:400;color:var(--cream)}
-.price-final{background:rgba(201,160,80,0.05);border:0.5px solid rgba(201,160,80,0.18);border-radius:12px;padding:28px 32px}
+.price-final{
+  background:rgba(201,160,80,0.05);
+  border:0.5px solid rgba(201,160,80,0.18);
+  border-radius:12px;padding:28px 32px;
+}
 .price-final-top{display:flex;align-items:baseline;gap:16px;margin-bottom:8px}
 .price-final-num{font-family:var(--serif);font-size:56px;font-weight:300;color:var(--gold);line-height:1}
 .price-final-old{font-family:var(--serif);font-size:22px;color:rgba(245,240,232,0.18);text-decoration:line-through}
@@ -175,15 +329,17 @@ section{height:100vh;position:relative;overflow:hidden;display:flex;align-items:
 .s6-quote em{font-style:italic;color:var(--gold)}
 .s6-sub{font-size:11px;font-weight:300;letter-spacing:0.12em;color:rgba(245,240,232,0.25);margin-bottom:48px}
 
-/* ── HAIR STRANDS CANVAS ───────────────────────────────── */
-#hairCanvas{position:absolute;inset:0;pointer-events:none;z-index:1;opacity:0.35}
-
-/* ── AMBIENT GLOW ──────────────────────────────────────── */
-.glow{position:absolute;border-radius:50%;pointer-events:none;filter:blur(90px);opacity:0.04}
+/* ── PARALLAX GLOW ─────────────────────────────────────── */
+.glow{
+  position:absolute;border-radius:50%;
+  pointer-events:none;filter:blur(90px);opacity:0.04;
+}
 .glow-gold{background:#C9A050}
 
-/* ── PARTICLES ─────────────────────────────────────────── */
-#particles{position:fixed;inset:0;pointer-events:none;z-index:0;opacity:0.45}
+/* ── PARTICLE CANVAS ───────────────────────────────────── */
+#particles{
+  position:fixed;inset:0;pointer-events:none;z-index:0;opacity:0.5;
+}
 </style>
 </head>
 <body>
@@ -194,12 +350,12 @@ section{height:100vh;position:relative;overflow:hidden;display:flex;align-items:
 <div id="cursor-ring"></div>
 
 <nav id="nav-dots">
-  <div class="dot active" data-section="0"></div>
-  <div class="dot" data-section="1"></div>
-  <div class="dot" data-section="2"></div>
-  <div class="dot" data-section="3"></div>
-  <div class="dot" data-section="4"></div>
-  <div class="dot" data-section="5"></div>
+  <div class="dot active" data-section="0" title="Hero"></div>
+  <div class="dot" data-section="1" title="Tehnologie"></div>
+  <div class="dot" data-section="2" title="Accesorii"></div>
+  <div class="dot" data-section="3" title="De ce Dyson"></div>
+  <div class="dot" data-section="4" title="Kit"></div>
+  <div class="dot" data-section="5" title="Final"></div>
 </nav>
 
 <!-- ═══ S1 HERO ═══════════════════════════════════════════ -->
@@ -207,18 +363,20 @@ section{height:100vh;position:relative;overflow:hidden;display:flex;align-items:
   <div class="bg-line" style="left:25%"></div>
   <div class="bg-line" style="left:50%"></div>
   <div class="bg-line" style="left:75%"></div>
-  <canvas id="hairCanvas"></canvas>
   <div class="glow glow-gold" style="width:700px;height:700px;right:-200px;top:-200px"></div>
 
   <div class="hero-inner">
     <div>
       <div class="hero-eyebrow reveal d1" id="heroEyebrow">Colecție exclusivă 2024</div>
+
       <div class="hero-title">
         <span class="title-line d1"><span>Dyson</span></span>
         <span class="title-line d2"><span>Airwrap</span></span>
         <span class="title-line d3"><span style="font-style:italic;color:var(--gold)">i.d.™</span></span>
       </div>
+
       <p class="hero-sub reveal d4">Un singur dispozitiv care ondulează, netezește, volumizează și usucă — fără căldură extremă. Tehnologia Coandă reinventată.</p>
+
       <div class="hero-price-row reveal d5">
         <span class="hero-price">€499</span>
         <span class="hero-price-old">€599</span>
@@ -229,11 +387,10 @@ section{height:100vh;position:relative;overflow:hidden;display:flex;align-items:
 
     <div style="position:relative;display:flex;align-items:center;justify-content:center">
       <div class="hero-ring" id="ring1" style="width:440px;height:440px"></div>
-      <div class="hero-ring" id="ring2" style="width:300px;height:300px;border-color:rgba(201,160,80,0.05)"></div>
-      <div class="hero-ring" id="ring3" style="width:160px;height:160px;border-color:rgba(201,160,80,0.1)"></div>
-      <div class="img-shimmer-wrap float-img reveal scale d3">
-        <img src="dyson1.jpg" alt="Dyson Airwrap" style="max-height:70vh;filter:drop-shadow(0 40px 80px rgba(0,0,0,0.55))">
-      </div>
+      <div class="hero-ring" id="ring2" style="width:300px;height:300px;transition-delay:0.2s"></div>
+      <div class="hero-ring" id="ring3" style="width:160px;height:160px;transition-delay:0.4s"></div>
+      <img src="dyson1.jpg" alt="Dyson Airwrap" class="float-img reveal scale d3"
+           style="max-height:70vh;filter:drop-shadow(0 40px 80px rgba(0,0,0,0.55))">
     </div>
   </div>
 
@@ -253,10 +410,22 @@ section{height:100vh;position:relative;overflow:hidden;display:flex;align-items:
       <p class="reveal left d3" style="font-size:13px;font-weight:300;line-height:1.9;color:rgba(245,240,232,0.38);max-width:360px">Motorul digital V9 generează presiunea necesară efectului Coandă — părul se înfășoară natural în jurul barelei, fără contact cu suprafețe fierbinți.</p>
     </div>
     <div class="tech-stats reveal right d2">
-      <div class="stat-box"><div class="stat-num" data-target="110" data-suffix="k">0k</div><div class="stat-label">RPM motor digital V9</div></div>
-      <div class="stat-box"><div class="stat-num">≤150°C</div><div class="stat-label">Temperatură controlată inteligent</div></div>
-      <div class="stat-box"><div class="stat-num">6-in-1</div><div class="stat-label">Versatilitate completă</div></div>
-      <div class="stat-box"><div class="stat-num" data-target="40" data-suffix="×/s">0×/s</div><div class="stat-label">Măsurători temperatură/secundă</div></div>
+      <div class="stat-box">
+        <div class="stat-num" data-target="110" data-suffix="k">0k</div>
+        <div class="stat-label">RPM motor digital V9</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-num">≤150°C</div>
+        <div class="stat-label">Temperatură controlată inteligent</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-num">6-in-1</div>
+        <div class="stat-label">Versatilitate completă</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-num" data-target="40" data-suffix="×/s">0×/s</div>
+        <div class="stat-label">Măsurători temperatură/secundă</div>
+      </div>
     </div>
   </div>
 </section>
@@ -278,10 +447,7 @@ section{height:100vh;position:relative;overflow:hidden;display:flex;align-items:
     </div>
     <div class="acc-stage">
       <div class="acc-display reveal scale d2">
-        <div class="acc-img-wrap">
-          <img id="imgA" src="dyson1.jpg" class="show" alt="accesoriu">
-          <img id="imgB" src=""           class="hide" alt="accesoriu">
-        </div>
+        <img id="accImg" src="dyson1.jpg" alt="accesoriu">
         <div class="acc-info-name" id="accName">Aparat Airwrap i.d.™</div>
         <div class="acc-info-desc" id="accDesc">Motorul digital V9 la 110.000 RPM generează efectul Coandă. Bluetooth® conectat la aplicația MyDyson™ pentru rutine personalizate de styling.</div>
       </div>
@@ -296,9 +462,24 @@ section{height:100vh;position:relative;overflow:hidden;display:flex;align-items:
     <div class="section-label reveal d1">De ce Dyson</div>
     <h2 class="section-title reveal d2">Nu este un fier de ondulat.<br><em>Este inginerie.</em></h2>
     <div class="reasons-grid">
-      <div class="reason-card reveal up d3"><div class="reason-num">I</div><div class="reason-highlight">Zero</div><div class="reason-hl-label">căldură extremă</div><div class="reason-desc">Temperatura este menținută sub 150°C — față de 230°C la fierele clasice. Părul rămâne sănătos, strălucitor, neafectat.</div></div>
-      <div class="reason-card reveal up d4"><div class="reason-num">II</div><div class="reason-highlight">Coandă</div><div class="reason-hl-label">efect aerodinamic</div><div class="reason-desc">Fluxul de aer înfășoară natural părul în jurul barelei. Fără cleme, fără tragere — bucle perfecte la prima încercare.</div></div>
-      <div class="reason-card reveal up d5"><div class="reason-num">III</div><div class="reason-highlight">i.d.™</div><div class="reason-hl-label">personalizare inteligentă</div><div class="reason-desc">Conectat prin Bluetooth la aplicația MyDyson™ — ajustează automat temperatura și fluxul în funcție de tipul tău de păr.</div></div>
+      <div class="reason-card reveal up d3">
+        <div class="reason-num">I</div>
+        <div class="reason-highlight">Zero</div>
+        <div class="reason-hl-label">căldură extremă</div>
+        <div class="reason-desc">Temperatura este menținută sub 150°C — față de 230°C la fierele clasice. Părul rămâne sănătos, strălucitor, neafectat.</div>
+      </div>
+      <div class="reason-card reveal up d4">
+        <div class="reason-num">II</div>
+        <div class="reason-highlight">Coandă</div>
+        <div class="reason-hl-label">efect aerodinamic</div>
+        <div class="reason-desc">Fluxul de aer înfășoară natural părul în jurul barelei. Fără cleme, fără tragere — bucle perfecte la prima încercare.</div>
+      </div>
+      <div class="reason-card reveal up d5">
+        <div class="reason-num">III</div>
+        <div class="reason-highlight">i.d.™</div>
+        <div class="reason-hl-label">personalizare inteligentă</div>
+        <div class="reason-desc">Conectat prin Bluetooth la aplicația MyDyson™ — ajustează automat temperatura și fluxul în funcție de tipul tău de păr.</div>
+      </div>
     </div>
   </div>
 </section>
@@ -307,7 +488,8 @@ section{height:100vh;position:relative;overflow:hidden;display:flex;align-items:
 <section id="s5">
   <div class="s5-inner">
     <div class="reveal left d2" style="display:flex;align-items:center;justify-content:center">
-      <img src="dyson.jpg" alt="Kit complet" style="max-height:68vh;max-width:100%;object-fit:contain;filter:drop-shadow(0 40px 80px rgba(0,0,0,0.6))">
+      <img src="dyson.jpg" alt="Kit complet"
+           style="max-height:68vh;max-width:100%;object-fit:contain;filter:drop-shadow(0 40px 80px rgba(0,0,0,0.6))">
     </div>
     <div>
       <div class="section-label reveal right d1">Kit complet</div>
@@ -348,135 +530,143 @@ section{height:100vh;position:relative;overflow:hidden;display:flex;align-items:
 <script>
 // ── CUSTOM CURSOR ─────────────────────────────────────────
 const cur = document.getElementById('cursor');
-const curRing = document.getElementById('cursor-ring');
+const ring = document.getElementById('cursor-ring');
 let mx=0,my=0,rx=0,ry=0;
-document.addEventListener('mousemove',e=>{ mx=e.clientX; my=e.clientY; cur.style.left=mx+'px'; cur.style.top=my+'px'; });
-(function animRing(){ rx+=(mx-rx)*0.12; ry+=(my-ry)*0.12; curRing.style.left=rx+'px'; curRing.style.top=ry+'px'; requestAnimationFrame(animRing); })();
-document.querySelectorAll('.acc-item,.dot,.kit-row,.reason-card,.stat-box').forEach(el=>{
-  el.addEventListener('mouseenter',()=>{ cur.style.width='14px'; cur.style.height='14px'; curRing.style.width='52px'; curRing.style.height='52px'; curRing.style.borderColor='rgba(201,160,80,0.8)'; });
-  el.addEventListener('mouseleave',()=>{ cur.style.width='8px'; cur.style.height='8px'; curRing.style.width='36px'; curRing.style.height='36px'; curRing.style.borderColor='rgba(201,160,80,0.5)'; });
+document.addEventListener('mousemove',e=>{
+  mx=e.clientX; my=e.clientY;
+  cur.style.left=mx+'px'; cur.style.top=my+'px';
 });
-
-// ── SMOOTH SCROLL WITH MOMENTUM (frânare) ─────────────────
-let currentY = 0, targetY = 0, isScrolling = false;
-const EASE = 0.072; // lower = more braking
-
-function smoothScroll() {
-  currentY += (targetY - currentY) * EASE;
-  if (Math.abs(targetY - currentY) < 0.5) currentY = targetY;
-  window.scrollTo(0, currentY);
-  if (Math.abs(targetY - currentY) > 0.5) {
-    requestAnimationFrame(smoothScroll);
-  } else {
-    isScrolling = false;
-  }
+function animRing(){
+  rx+=(mx-rx)*0.12; ry+=(my-ry)*0.12;
+  ring.style.left=rx+'px'; ring.style.top=ry+'px';
+  requestAnimationFrame(animRing);
 }
-
-window.addEventListener('wheel', e => {
-  e.preventDefault();
-  targetY = Math.max(0, Math.min(document.body.scrollHeight - window.innerHeight, targetY + e.deltaY * 1.2));
-  currentY = window.scrollY;
-  if (!isScrolling) { isScrolling = true; requestAnimationFrame(smoothScroll); }
-}, { passive: false });
+animRing();
+document.querySelectorAll('a,button,.acc-item,.dot,.kit-row').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{
+    cur.style.width='14px'; cur.style.height='14px';
+    ring.style.width='52px'; ring.style.height='52px';
+    ring.style.borderColor='rgba(201,160,80,0.8)';
+  });
+  el.addEventListener('mouseleave',()=>{
+    cur.style.width='8px'; cur.style.height='8px';
+    ring.style.width='36px'; ring.style.height='36px';
+    ring.style.borderColor='rgba(201,160,80,0.5)';
+  });
+});
 
 // ── PARTICLES ─────────────────────────────────────────────
 const pc = document.getElementById('particles');
 const pctx = pc.getContext('2d');
-function resizePC(){ pc.width=window.innerWidth; pc.height=window.innerHeight; }
-resizePC(); window.addEventListener('resize', resizePC);
-const PARTS = Array.from({length:55},()=>({ x:Math.random()*window.innerWidth, y:Math.random()*window.innerHeight, r:Math.random()*1.1+0.3, vx:(Math.random()-.5)*0.15, vy:(Math.random()-.5)*0.15, a:Math.random()*0.35+0.08 }));
-(function drawP(){ pctx.clearRect(0,0,pc.width,pc.height); PARTS.forEach(p=>{ p.x+=p.vx; p.y+=p.vy; if(p.x<0)p.x=pc.width; if(p.x>pc.width)p.x=0; if(p.y<0)p.y=pc.height; if(p.y>pc.height)p.y=0; pctx.beginPath(); pctx.arc(p.x,p.y,p.r,0,Math.PI*2); pctx.fillStyle=`rgba(201,160,80,${p.a})`; pctx.fill(); }); requestAnimationFrame(drawP); })();
+pc.width = window.innerWidth; pc.height = window.innerHeight;
+window.addEventListener('resize',()=>{ pc.width=window.innerWidth; pc.height=window.innerHeight; });
 
-// ── HAIR STRANDS on hero ──────────────────────────────────
-const hc = document.getElementById('hairCanvas');
-const hctx = hc.getContext('2d');
-function resizeHC(){ hc.width=document.getElementById('s1').offsetWidth; hc.height=document.getElementById('s1').offsetHeight; }
-resizeHC(); window.addEventListener('resize', resizeHC);
-
-const STRANDS = Array.from({length:18},()=>({
-  x: Math.random()*hc.width,
-  y: -Math.random()*hc.height,
-  len: 80+Math.random()*160,
-  speed: 0.4+Math.random()*0.6,
-  wave: Math.random()*Math.PI*2,
-  waveAmp: 12+Math.random()*20,
-  waveSpeed: 0.012+Math.random()*0.008,
-  alpha: 0.06+Math.random()*0.1,
-  width: 0.6+Math.random()*0.8,
+const PARTICLES = Array.from({length:55},()=>({
+  x: Math.random()*window.innerWidth,
+  y: Math.random()*window.innerHeight,
+  r: Math.random()*1.2+0.3,
+  vx:(Math.random()-0.5)*0.18,
+  vy:(Math.random()-0.5)*0.18,
+  a: Math.random()*0.4+0.1,
 }));
 
-(function drawHair(){
-  hctx.clearRect(0,0,hc.width,hc.height);
-  STRANDS.forEach(s=>{
-    s.y += s.speed;
-    s.wave += s.waveSpeed;
-    if(s.y > hc.height + s.len) s.y = -s.len;
-    hctx.beginPath();
-    hctx.strokeStyle = `rgba(201,160,80,${s.alpha})`;
-    hctx.lineWidth = s.width;
-    hctx.moveTo(s.x, s.y);
-    for(let i=1; i<=s.len; i+=4){
-      const wx = s.x + Math.sin(s.wave + i*0.06) * s.waveAmp;
-      hctx.lineTo(wx, s.y + i);
-    }
-    hctx.stroke();
+function drawParticles(){
+  pctx.clearRect(0,0,pc.width,pc.height);
+  PARTICLES.forEach(p=>{
+    p.x+=p.vx; p.y+=p.vy;
+    if(p.x<0)p.x=pc.width; if(p.x>pc.width)p.x=0;
+    if(p.y<0)p.y=pc.height; if(p.y>pc.height)p.y=0;
+    pctx.beginPath();
+    pctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+    pctx.fillStyle=`rgba(201,160,80,${p.a})`;
+    pctx.fill();
   });
-  requestAnimationFrame(drawHair);
-})();
+  requestAnimationFrame(drawParticles);
+}
+drawParticles();
 
-// ── REVEAL OBSERVER ───────────────────────────────────────
-const revObs = new IntersectionObserver(entries=>{
-  entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('visible'); revObs.unobserve(e.target); } });
-},{threshold:0.15});
-document.querySelectorAll('.reveal').forEach(el=>revObs.observe(el));
-
-// title lines
+// ── INTERSECTION OBSERVER — REVEAL ───────────────────────
+const revealEls = document.querySelectorAll('.reveal');
 const titleLines = document.querySelectorAll('.title-line');
 const heroEyebrow = document.getElementById('heroEyebrow');
-const tlObs = new IntersectionObserver(entries=>{
-  if(entries[0].isIntersecting){
-    titleLines.forEach((l,i)=>setTimeout(()=>l.classList.add('visible'),i*130+180));
-    heroEyebrow && heroEyebrow.classList.add('line-grow');
-    tlObs.unobserve(entries[0].target);
-  }
+
+const revealObs = new IntersectionObserver(entries=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){
+      entry.target.classList.add('visible');
+      revealObs.unobserve(entry.target);
+    }
+  });
+},{threshold:0.15});
+
+revealEls.forEach(el=>revealObs.observe(el));
+
+// title lines (special treatment)
+const titleObs = new IntersectionObserver(entries=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){
+      titleLines.forEach((l,i)=>{
+        setTimeout(()=>l.classList.add('visible'),i*120+200);
+      });
+      heroEyebrow && heroEyebrow.classList.add('line-grow');
+      titleObs.unobserve(entry.target);
+    }
+  });
 },{threshold:0.3});
-if(titleLines[0]) tlObs.observe(titleLines[0]);
+if(titleLines[0]) titleObs.observe(titleLines[0]);
 
 // hero rings
 const ringObs = new IntersectionObserver(entries=>{
   if(entries[0].isIntersecting){
-    setTimeout(()=>document.getElementById('ring1').classList.add('show'),350);
-    setTimeout(()=>document.getElementById('ring2').classList.add('show'),550);
-    setTimeout(()=>document.getElementById('ring3').classList.add('show'),750);
-    ringObs.unobserve(entries[0].target);
+    setTimeout(()=>document.getElementById('ring1').classList.add('show'),400);
+    setTimeout(()=>document.getElementById('ring2').classList.add('show'),600);
+    setTimeout(()=>document.getElementById('ring3').classList.add('show'),800);
   }
 },{threshold:0.3});
-ringObs.observe(document.getElementById('s1'));
+const s1 = document.getElementById('s1');
+if(s1) ringObs.observe(s1);
 
-// counters
-const cntObs = new IntersectionObserver(entries=>{
+// ── COUNTER ANIMATION ────────────────────────────────────
+const counterObs = new IntersectionObserver(entries=>{
   entries.forEach(entry=>{
     if(!entry.isIntersecting) return;
     entry.target.querySelectorAll('[data-target]').forEach(el=>{
-      const target=+el.dataset.target, suffix=el.dataset.suffix||'';
-      const t0=performance.now(), dur=1600;
-      (function step(t){ const p=Math.min(1,(t-t0)/dur), ease=1-Math.pow(1-p,3); el.textContent=Math.round(target*ease)+suffix; if(p<1)requestAnimationFrame(step); })(t0);
+      const target=+el.dataset.target;
+      const suffix=el.dataset.suffix||'';
+      let start=0; const dur=1600; const t0=performance.now();
+      function step(t){
+        const p=Math.min(1,(t-t0)/dur);
+        const ease=1-Math.pow(1-p,3);
+        el.textContent=Math.round(start+(target-start)*ease)+suffix;
+        if(p<1) requestAnimationFrame(step);
+      }
+      requestAnimationFrame(step);
     });
-    cntObs.unobserve(entry.target);
+    counterObs.unobserve(entry.target);
   });
 },{threshold:0.5});
-document.querySelectorAll('.tech-stats').forEach(el=>cntObs.observe(el));
+document.querySelectorAll('.tech-stats').forEach(el=>counterObs.observe(el));
 
-// nav dots
-const sections = document.querySelectorAll('section');
-const dots = document.querySelectorAll('.dot');
-const navObs = new IntersectionObserver(entries=>{
-  entries.forEach(e=>{ if(e.isIntersecting){ const i=[...sections].indexOf(e.target); dots.forEach(d=>d.classList.remove('active')); if(dots[i])dots[i].classList.add('active'); } });
+// ── NAV DOTS ─────────────────────────────────────────────
+const sections=document.querySelectorAll('section');
+const dots=document.querySelectorAll('.dot');
+const navObs=new IntersectionObserver(entries=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){
+      const i=[...sections].indexOf(entry.target);
+      dots.forEach(d=>d.classList.remove('active'));
+      if(dots[i]) dots[i].classList.add('active');
+    }
+  });
 },{threshold:0.5});
 sections.forEach(s=>navObs.observe(s));
-dots.forEach(d=>d.addEventListener('click',()=>{ targetY=sections[+d.dataset.section].getBoundingClientRect().top+window.scrollY; currentY=window.scrollY; isScrolling=true; requestAnimationFrame(smoothScroll); }));
+dots.forEach(dot=>{
+  dot.addEventListener('click',()=>{
+    sections[+dot.dataset.section].scrollIntoView({behavior:'smooth'});
+  });
+});
 
-// ── ACCESSORIES — double buffer swap (fix ghost image bug) ─
+// ── ACCESSORIES ──────────────────────────────────────────
 const ACCS=[
   {img:'dyson1.jpg',name:'Aparat Airwrap i.d.™',        desc:'Motorul digital V9 la 110.000 RPM generează efectul Coandă. Bluetooth® conectat la aplicația MyDyson™ pentru rutine personalizate de styling.'},
   {img:'dyson2.jpg',name:'Barelă Airwrap™ 40mm',         desc:'Creează bucle largi și ondulații voluminoase în ambele direcții cu un singur barrel. Efectul Coandă înfășoară părul natural — ideală pentru păr lung.'},
@@ -486,42 +676,26 @@ const ACCS=[
   {img:'dyson6.jpg',name:'Barelă conică Airwrap™',       desc:'Formă conică cu vârf subțiat — stilizare mai aproape de rădăcină pentru bucle mai definite. Funcționează în ambele direcții.'},
 ];
 
-let imgFront = document.getElementById('imgA'); // currently visible
-let imgBack  = document.getElementById('imgB'); // preload target
-const accName = document.getElementById('accName');
-const accDesc = document.getElementById('accDesc');
-let busy = false;
+const accImg=document.getElementById('accImg');
+const accName=document.getElementById('accName');
+const accDesc=document.getElementById('accDesc');
 
 document.querySelectorAll('.acc-item').forEach(item=>{
-  item.addEventListener('click', ()=>{
-    if(busy) return;
-    busy = true;
-
+  item.addEventListener('click',()=>{
     document.querySelectorAll('.acc-item').forEach(i=>i.classList.remove('active'));
     item.classList.add('active');
-    const d = ACCS[+item.dataset.i];
-
-    // preload into back buffer
-    imgBack.src = d.img;
-    imgBack.onload = () => {
-      // fade out front, fade in back
-      imgFront.classList.remove('show'); imgFront.classList.add('hide');
-      imgBack.classList.remove('hide');  imgBack.classList.add('show');
-
-      // fade text
-      accName.classList.add('fade'); accDesc.classList.add('fade');
-      setTimeout(()=>{
-        accName.textContent = d.name;
-        accDesc.textContent = d.desc;
-        accName.classList.remove('fade'); accDesc.classList.remove('fade');
-      }, 280);
-
-      // swap references
-      [imgFront, imgBack] = [imgBack, imgFront];
-      setTimeout(()=>{ busy=false; }, 400);
-    };
-    // if already cached, onload may not fire — force it
-    if(imgBack.complete) imgBack.onload();
+    const d=ACCS[+item.dataset.i];
+    accImg.classList.add('out');
+    accName.classList.add('out');
+    accDesc.classList.add('out');
+    setTimeout(()=>{
+      accImg.src=d.img;
+      accName.textContent=d.name;
+      accDesc.textContent=d.desc;
+      accImg.classList.remove('out');
+      accName.classList.remove('out');
+      accDesc.classList.remove('out');
+    },280);
   });
 });
 </script>
