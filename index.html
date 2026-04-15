@@ -167,7 +167,7 @@ body{background:#0C0C0E;color:#F0EDE8;font-family:'Inter',system-ui,sans-serif;m
     <!-- VIEWER -->
     <div class="viewer">
       <div class="viewer-box" id="vbox">
-        <img class="product-img" id="mainImg" src="dyson1.png" alt="Dyson Airwrap HS08" draggable="false">
+        <img class="product-img" id="mainImg" src="dyson1.jpg" alt="Dyson Airwrap HS08" draggable="false">
         <img class="acc-overlay" id="accOverlay" src="" alt="" draggable="false">
       </div>
       <div class="hint-bar">
@@ -196,28 +196,28 @@ body{background:#0C0C0E;color:#F0EDE8;font-family:'Inter',system-ui,sans-serif;m
 
       <div class="sec-label">Selectează accesoriul</div>
       <div class="acc-grid">
-        <div class="acc-card" data-img="dyson1.png" data-name="Aparat principal" data-desc="Dyson Airwrap i.d.™ HS08 — motorul digital V9 la 110.000 RPM generează efectul Coandă. Stilizare fără căldură extremă.">
-          <img class="acc-thumb" src="dyson1.png" alt="Aparat">
+        <div class="acc-card" data-img="dyson1.jpg" data-name="Aparat principal" data-desc="Dyson Airwrap i.d.™ HS08 — motorul digital V9 la 110.000 RPM generează efectul Coandă. Stilizare fără căldură extremă.">
+          <img class="acc-thumb" src="dyson1.jpg" alt="Aparat">
           <div class="acc-label">Aparat</div>
         </div>
-        <div class="acc-card" data-img="dyson2.png" data-name="Barelă Airwrap™ 40mm" data-desc="Creează bucle largi și ondulații voluminoase în ambele direcții cu un singur barrel. Ideală pentru păr lung.">
-          <img class="acc-thumb" src="dyson2.png" alt="Barelă 40mm">
+        <div class="acc-card" data-img="dyson2.jpg" data-name="Barelă Airwrap™ 40mm" data-desc="Creează bucle largi și ondulații voluminoase în ambele direcții cu un singur barrel. Ideală pentru păr lung.">
+          <img class="acc-thumb" src="dyson2.jpg" alt="Barelă 40mm">
           <div class="acc-label">Barelă 40mm</div>
         </div>
-        <div class="acc-card" data-img="dyson3.png" data-name="Uscător Coandă 2-in-1" data-desc="Usucă și netezește simultan — elimină frizul cu flux de aer controlat. Două moduri: blow-dry și flyaway smoother.">
-          <img class="acc-thumb" src="dyson3.png" alt="Uscător">
+        <div class="acc-card" data-img="dyson3.jpg" data-name="Uscător Coandă 2-in-1" data-desc="Usucă și netezește simultan — elimină frizul cu flux de aer controlat. Două moduri: blow-dry și flyaway smoother.">
+          <img class="acc-thumb" src="dyson3.jpg" alt="Uscător">
           <div class="acc-label">Uscător 2-in-1</div>
         </div>
-        <div class="acc-card" data-img="dyson4.png" data-name="Perie pre-styling" data-desc="Usucă rapid părul de la ud la 80% înainte de styling. Peri fini care creează tensiune și volum pe măsură ce se usucă.">
-          <img class="acc-thumb" src="dyson4.png" alt="Perie pre-styling">
+        <div class="acc-card" data-img="dyson4.jpg" data-name="Perie pre-styling" data-desc="Usucă rapid părul de la ud la 80% înainte de styling. Peri fini care creează tensiune și volum pe măsură ce se usucă.">
+          <img class="acc-thumb" src="dyson4.jpg" alt="Perie pre-styling">
           <div class="acc-label">Pre-styling</div>
         </div>
-        <div class="acc-card" data-img="dyson5.png" data-name="Perie rotundă volumizantă" data-desc="Peri lungi și fini care direcționează aerul adânc în păr. Creează volum maxim și corp natural cu finisaj salon.">
-          <img class="acc-thumb" src="dyson5.png" alt="Perie rotundă">
+        <div class="acc-card" data-img="dyson5.jpg" data-name="Perie rotundă volumizantă" data-desc="Peri lungi și fini care direcționează aerul adânc în păr. Creează volum maxim și corp natural cu finisaj salon.">
+          <img class="acc-thumb" src="dyson5.jpg" alt="Perie rotundă">
           <div class="acc-label">Perie rotundă</div>
         </div>
-        <div class="acc-card" data-img="dyson6.png" data-name="Barelă conică Airwrap™" data-desc="Formă conică cu vârf subțiat — stilizare mai aproape de rădăcină, pentru bucle mai definite. Funcționează în ambele direcții.">
-          <img class="acc-thumb" src="dyson6.png" alt="Barelă conică">
+        <div class="acc-card" data-img="dyson6.jpg" data-name="Barelă conică Airwrap™" data-desc="Formă conică cu vârf subțiat — stilizare mai aproape de rădăcină, pentru bucle mai definite. Funcționează în ambele direcții.">
+          <img class="acc-thumb" src="dyson6.jpg" alt="Barelă conică">
           <div class="acc-label">Barelă conică</div>
         </div>
       </div>
@@ -253,7 +253,7 @@ let isDrag = false, lastX = 0, rotY = 0, zoom = 1;
 
 // Rotation images: dyson1=front, dyson1=¾left, dyson1=¾right (same img, CSS rotate)
 // For real 360 you'd need multiple angle shots; here we CSS-rotate the single image
-const angleImages = { 0:'dyson1.png', 1:'dyson1.png', '-1':'dyson1.png', 2:'dyson1.png' };
+const angleImages = { 0:'dyson1.jpg', 1:'dyson1.jpg', '-1':'dyson1.jpg', 2:'dyson1.jpg' };
 
 function applyTransform() {
   const t = `translate(-50%,-50%) perspective(900px) rotateY(${rotY}deg) scale(${zoom})`;
