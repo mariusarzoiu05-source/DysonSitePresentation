@@ -680,29 +680,35 @@ const accImg=document.getElementById('accImg');
 const accName=document.getElementById('accName');
 const accDesc=document.getElementById('accDesc');
 
+ACCS.forEach(a=>{
+  const img=new Image();
+  img.src=a.img;
+});
+
 document.querySelectorAll('.acc-item').forEach(item=>{
   item.addEventListener('click',()=>{
     document.querySelectorAll('.acc-item').forEach(i=>i.classList.remove('active'));
     item.classList.add('active');
     const d=ACCS[+item.dataset.i];
     
-    // FAZA 1: fade out
+    // Fade out
     accImg.classList.add('out');
     accName.classList.add('out');
     accDesc.classList.add('out');
     
     setTimeout(()=>{
-      // FAZA 2: schimbă conținutul
-      accImg.src=d.img;
       accName.textContent=d.name;
       accDesc.textContent=d.desc;
       
-      // FAZA 3: forțează reflow înainte de fade in
-      accImg.offsetHeight; // <- asta e cheia
+      // Asteapta ca imaginea sa se incarce INAINTE de fade in
+      accImg.onload = ()=>{
+        accImg.classList.remove('out');
+        accName.classList.remove('out');
+        accDesc.classList.remove('out');
+        accImg.onload = null; // cleanup
+      };
       
-      accImg.classList.remove('out');
-      accName.classList.remove('out');
-      accDesc.classList.remove('out');
+      accImg.src=d.img;
     },300);
   });
 });
